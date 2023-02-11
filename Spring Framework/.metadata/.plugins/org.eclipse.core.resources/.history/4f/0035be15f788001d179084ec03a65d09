@@ -1,0 +1,90 @@
+	<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Update</title>
+<style>
+html {
+	background-color: #ccc;
+}
+
+form {
+	display: block;
+	left: 50%;
+	position: absolute;
+	top: 30%;
+}
+
+input[type=search] {
+	border: solid 3px rgb(76, 68, 68);
+	box-sizing: border-box;
+	font-size: 2em;
+	height: 2em;
+	margin-left: -15vw;
+	outline: solid #fc0 0;
+	padding: .5em;
+	transition: all 2s ease-in;
+	width: 30vw;
+	z-index: 1;
+}
+</style>
+</head>
+<body>
+		<form>
+			<input type="search" placeholder="Search for remove...">
+		</form>
+		<%
+	if (msg != null) {
+	%>
+	<h3 align="center"><%=msg%></h3>
+	<%
+	}
+	%>
+	<%
+	if (students != null) {
+	%>
+	<fieldset style="width: auto; margin: 0%;">
+		<legend>Student Details</legend>
+		<table id="data">
+			<tr>
+				<td>
+					<h3>ID</h3>
+				</td>
+				<td>
+					<h3>Name</h3>
+				</td>
+				<td>
+					<h3>Email</h3>
+				</td>
+				<td>
+					<h3>Contact</h3>
+				</td>
+				<td>
+					<h3>City</h3>
+				</td>
+				<td>
+					<h3>Username</h3>
+				</td>
+				<td>
+					<h3>Password</h3>
+				</td>
+			</tr>
+			<%
+			for (StudentPOJO student : students) {
+			%>
+			<tr>
+				<td><%=student.getId()%></td>
+				<td><%=student.getName()%></td>
+				<td><%=student.getEmail()%></td>
+				<td><%=student.getContact()%></td>
+				<td><%=student.getCity()%></td>
+				<td><%=student.getUsername()%></td>
+				<td><%=student.getPassword()%></td>
+			</tr>
+			<%
+			}
+			%>
+</body>
+</html>

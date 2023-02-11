@@ -1,0 +1,5 @@
+package com.jspiders.hibernate.dao.select;
+
+public class StudentDAOSelect {
+
+}

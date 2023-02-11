@@ -1,0 +1,5 @@
+package com.jspiders.designPattern.singletonEager;
+
+public class SingletonEager {
+
+}

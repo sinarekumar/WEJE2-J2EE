@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+    <fullyQualifiedTypeName name="com.jspider.multithreading1.Demo"/>
+    <fullyQualifiedTypeName name="com.jspider.multithreading2.runnableInterface.Demo1"/>
+    <fullyQualifiedTypeName name="com.jspider.synchronization.Husband"/>
+    <fullyQualifiedTypeName name="com.jspider.multithreadingMethods.Student"/>
+    <fullyQualifiedTypeName name="com.jspider.multithreadingMethods.Cafe"/>
+    <fullyQualifiedTypeName name="javax.swing.text.StyledEditorKit.ForegroundAction"/>
+    <fullyQualifiedTypeName name="java.lang.Thread"/>
+    <fullyQualifiedTypeName name="java.io.File"/>
+</qualifiedTypeNameHistroy>

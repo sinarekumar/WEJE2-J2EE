@@ -1,0 +1,5 @@
+package com.jspider.hibernate1;
+
+public @interface id {
+
+}

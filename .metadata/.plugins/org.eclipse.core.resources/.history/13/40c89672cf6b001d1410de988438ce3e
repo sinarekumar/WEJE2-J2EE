@@ -1,0 +1,5 @@
+package com.jspiders.hibernate.dao.update;
+
+public class StudentDAOUpdate {
+
+}

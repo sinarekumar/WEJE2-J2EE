@@ -1,0 +1,50 @@
+package com.jspider.springMVC.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+
+import com.jspider.springMVC.POJO.StudentPOJO;
+import com.jspider.springMVC.service.StudentService;
+
+@Controller
+public class StudentController {
+	@Autowired
+	private StudentService service;
+	@GetMapping("/home")
+	public String home() {
+		return "Home";
+	}
+
+	@GetMapping("/login")
+	public String login() {
+		StudentPOJO pojo = service.login();
+		if(pojo != null) {
+			return "Home";
+		}
+		return "LoginForm";
+	}
+	
+	@GetMapping("/add")
+	public String add() {
+		return "AddStudent";
+	}
+	
+	@GetMapping("/search")
+	public String search() {
+		return "SearchStudent";
+	}
+	
+	@GetMapping("/update")
+	public String update() {
+		return "UpdateStudent";
+	}
+	
+	@GetMapping("/remove")
+	public String remove() {
+		return "RemoveStudent";
+	}
+
+}
+

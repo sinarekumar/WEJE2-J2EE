@@ -1,0 +1,19 @@
+package com.jspider.springMVC.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.jspiders.springMVC.POJO.StudentPOJO;
+import com.jspiders.springMVC.Repository.StudentRepository;
+@Service
+public class StudentService {
+	@Autowired
+	private StudentRepository repository;
+
+	public StudentPOJO login(String username, String password) {
+		StudentPOJO pojo = repository.login(username, password);
+		return pojo;
+	}
+
+}
+

@@ -1,0 +1,97 @@
+package MusicPlayerUsingJDBC.main;
+
+import java.util.Scanner;
+
+public class Multiplayer1 {
+
+	static Multiplayer1 multiplayer1 = new Multiplayer1();
+	static boolean loop = true;
+
+	public static void main(String[] args) {
+		multiplayer1.menu();
+	}
+
+	public void menu() {
+		try (Scanner scanner = new Scanner(System.in)) {
+			System.out.println(
+					"Choose to make operation for \n1. Play Song \n.2 Add Or Remove Song \n.3 Edit Song \n.4 Exist ");
+			int choose = scanner.nextInt();
+			switch (choose) {
+			case 1:
+				multiplayer1.playSong();
+				break;
+			case 2:
+				multiplayer1.addOrRemoveSongs();
+				break;
+			case 3:
+				multiplayer1.editSong();
+				break;
+			default:
+				multiplayer1.exist();
+				break;
+			}
+		}
+	}
+
+	public void playSong() {
+		try (Scanner scanner = new Scanner(System.in)) {
+			System.out.println("Choose any option \n1. Choose Song \n2. Play All Song\n3. Random Song\n4. Go back");
+			int choose = scanner.nextInt();
+			SongOperation1 songOperation1 = new SongOperation1();
+			switch (choose) {
+			case 1:
+				songOperation1.chooseSongToPlay();
+				break;
+			case 2:
+				songOperation1.playAllSongs();
+				break;
+			case 3:
+				songOperation1.playRandomeSong();
+				break;
+			default:
+				multiplayer1.menu();
+				break;
+			}
+		}
+	}
+
+	public void addOrRemoveSongs() {
+		try (Scanner scanner = new Scanner(System.in)) {
+			System.out.println("Choose any option \n1. Add Song \n2. Remove Song\n3. Go Back");
+			int choose = scanner.nextInt();
+			SongOperation1 songOperation1 = new SongOperation1();
+			switch (choose) {
+			case 1:
+				songOperation1.addSong();
+				break;
+			case 2:
+				songOperation1.removeSongs();
+				break;
+			default:
+				multiplayer1.menu();
+				break;
+			}
+		}
+	}
+
+	public void editSong() {
+		try (Scanner scanner = new Scanner(System.in)) {
+			System.out.println("Choose option \n1. Update song ");
+			int choose = scanner.nextInt();
+			SongOperation1 songOperation1 = new SongOperation1();
+			switch (choose) {
+			case 1:
+				songOperation1.update();
+				break;
+			default:
+				multiplayer1.menu();
+				break;
+			}
+		}
+	}
+
+	public void exist() {
+		System.out.println("You are exist from application");
+	}
+
+}

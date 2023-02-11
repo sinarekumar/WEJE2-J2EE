@@ -1,0 +1,9 @@
+package com.jspider.multithread1.resource;
+
+public class Account {
+
+	public Account() {
+		// TODO Auto-generated constructor stub
+	}
+
+}

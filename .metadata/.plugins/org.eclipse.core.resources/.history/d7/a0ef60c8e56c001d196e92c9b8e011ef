@@ -1,0 +1,10 @@
+package com.jsiders.hibernate.onetomany.dao;
+
+public class FatherChildDAO {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

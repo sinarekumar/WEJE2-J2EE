@@ -1,0 +1,450 @@
+package MusicPlayerUsingJDBC.main;
+
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Properties;
+import java.util.Scanner;
+
+public class SongOperation1 {
+	static Connection connection;
+	static java.sql.Statement statement;
+	static PreparedStatement preparedStatement;
+	static ResultSet resultSet;
+	static String driverPath = "com.mysql.cj.jdbc.Driver";
+	static String filePath = "C:\\Users\\mamid\\OneDrive\\Desktop\\WEJE2\\MusicPlayer Using JDBC\\RESOURCES\\db_info.properties";
+	static String query;
+	static int resultInt;
+	static Properties properties = new Properties();
+	static FileReader fileReader;
+	static Scanner scanner = new Scanner(System.in);
+	static ArrayList<song> list = new ArrayList<song>();
+
+	public void chooseSongToPlay() {
+		try {
+			fileReader = new FileReader(filePath);
+			properties.load(fileReader);
+			Class.forName(properties.getProperty("driverPath"));
+			connection = DriverManager.getConnection(properties.getProperty("dbPath"), properties);
+			query = "select count(*) from song";
+			statement = connection.createStatement();
+			resultSet = statement.executeQuery(query);
+			while (resultSet.next()) {
+				if (resultSet.getInt(1) == 0) {
+					System.out.println("No song present");
+				}
+			}
+			int index = 1;
+			query = "select * from song";
+			statement = connection.createStatement();
+			resultSet = statement.executeQuery(query);
+			while (resultSet.next()) {
+				if (index == 1) {
+					System.out.println("Choose any of the songs shown below");
+				}
+				System.out.println("press " + index + " for " + resultSet.getString(1) + " | " + resultSet.getString(2)
+						+ " | " + resultSet.getString(3) + " | " + resultSet.getString(4) + " | "
+						+ resultSet.getString(5) + " | " + resultSet.getString(6) + " | " + resultSet.getString(7));
+				index++;
+			}
+			resultSet = statement.executeQuery(query);
+			int a = scanner.nextInt();
+			index = 1;
+			while (resultSet.next()) {
+				if (index == a) {
+					System.out.println("\n" + resultSet.getString(2) + " is playing now \n");
+					break;
+				}
+				index++;
+			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			if (connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+
+	public void playAllSongs() {
+		try {
+			fileReader = new FileReader(filePath);
+			properties.load(fileReader);
+			Class.forName(properties.getProperty("driverPath"));
+			connection = DriverManager.getConnection(properties.getProperty("dbPath"), properties);
+			query = "select count(*) from song";
+			statement = connection.createStatement();
+			resultSet = statement.executeQuery(query);
+			while (resultSet.next()) {
+				if (resultSet.getInt(1) == 0) {
+					System.out.println("No song present");
+				}
+			}
+			query = "select * from song";
+			statement = connection.createStatement();
+			resultSet = statement.executeQuery(query);
+			while (resultSet.next()) {
+				System.out.println(resultSet.getString(1) + " | " + resultSet.getString(2) + " | "
+						+ resultSet.getString(3) + " | " + resultSet.getString(4) + " | " + resultSet.getString(5)
+						+ " | " + resultSet.getString(6) + " | " + resultSet.getString(7));
+			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			if (connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+
+	public void playRandomeSong() {
+		try {
+			fileReader = new FileReader(filePath);
+			properties.load(fileReader);
+			Class.forName(properties.getProperty("driverPath"));
+			connection = DriverManager.getConnection(properties.getProperty("dbPath"), properties);
+			query = "select count(*) from song";
+			statement = connection.createStatement();
+			resultSet = statement.executeQuery(query);
+			while (resultSet.next()) {
+				if (resultSet.getInt(1) == 0) {
+					System.out.println("No song present");
+				}
+			}
+			query = "select * from song";
+			statement = connection.createStatement();
+			resultSet = statement.executeQuery(query);
+			int b = (int) Math.random();
+			int index = 1;
+			while (resultSet.next()) {
+				if (index == b) {
+					System.out.println("\n" + resultSet.getString(2) + " is playing now \n");
+					break;
+				}
+				index++;
+			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			if (connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+
+	public void addSong() {
+		try {
+			fileReader = new FileReader(filePath);
+			properties.load(fileReader);
+			Class.forName(properties.getProperty("driverPath"));
+			connection = DriverManager.getConnection(properties.getProperty("dbPath"), properties);
+			query = "select  count(*) from song";
+			statement = connection.createStatement();
+			resultSet = statement.executeQuery(query);
+			while (resultSet.next()) {
+				if (resultSet.getInt(1) == 0) {
+					System.out.println("No song present");
+				}
+			}
+			int index = 1;
+			query = "select * from song";
+			statement = connection.createStatement();
+			resultSet = statement.executeQuery(query);
+			while (resultSet.next()) {
+				if (index == 1) {
+					System.out.println("Choose any of the songs shown below");
+				}
+				System.out.println("press " + index + " for " + resultSet.getString(1) + " | " + resultSet.getString(2)
+						+ " | " + resultSet.getString(3) + " | " + resultSet.getString(4) + " | "
+						+ resultSet.getString(5) + " | " + resultSet.getString(6) + " | " + resultSet.getString(7));
+				index++;
+			}
+			String query = "insert into song " + "values(?,?,?,?,?,?,?)";
+			preparedStatement = connection.prepareStatement(query);
+			System.out.println("addSong");
+			System.out.println("Enter Song id:\n");
+			preparedStatement.setInt(1, scanner.nextInt());
+			System.out.println("Enter Song name:\n");
+			preparedStatement.setString(2, scanner.nextLine());
+			System.out.println("Enter Singer name:\n");
+			preparedStatement.setString(3, scanner.nextLine());
+			System.out.println("Enter Movie name:\n");
+			preparedStatement.setString(4, scanner.nextLine());
+			System.out.println("Enter Composer name:\n");
+			preparedStatement.setString(5, scanner.nextLine());
+			System.out.println("Enter Lyricist name:\n");
+			preparedStatement.setString(6, scanner.nextLine());
+			System.out.println("Enter Song Length:\n");
+			preparedStatement.setString(7, scanner.nextLine());
+			resultInt = preparedStatement.executeUpdate();
+			System.out.println("Song added in Playlist Successfully...");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			if (connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+
+	public void removeSongs() {
+		try {
+			fileReader = new FileReader(filePath);
+			properties.load(fileReader);
+			Class.forName(properties.getProperty("driverPath"));
+			connection = DriverManager.getConnection(properties.getProperty("dbPath"), properties);
+			query = "select count(*) from song";
+			statement = connection.createStatement();
+			resultSet = statement.executeQuery(query);
+			while (resultSet.next()) {
+				if (resultSet.getInt(1) == 0) {
+					System.out.println("No song present");
+				}
+			}
+			query = "select * from song";
+			statement = connection.createStatement();
+			resultSet = statement.executeQuery(query);
+			while (resultSet.next()) {
+				System.out.println(resultSet.getString(1) + " | " + resultSet.getString(2) + " | "
+						+ resultSet.getString(3) + " | " + resultSet.getString(4) + " | " + resultSet.getString(5)
+						+ " | " + resultSet.getString(6) + " | " + resultSet.getString(7));
+			}
+
+			query = "delete from music where(id=?)";
+			preparedStatement = connection.prepareStatement(query);
+			System.out.println("please enter the song id you want to delete");
+			preparedStatement.setInt(1, scanner.nextInt());
+			resultInt = preparedStatement.executeUpdate();
+			System.out.println(" " + resultInt + " song deleted successfully");
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			if (connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+
+	public void update() {
+		try {
+			fileReader = new FileReader(filePath);
+			properties.load(fileReader);
+			Class.forName(properties.getProperty("driverPath"));
+			connection = DriverManager.getConnection(properties.getProperty("dbPath"), properties);
+			query = "select count(*) from song";
+			statement = connection.createStatement();
+			resultSet = statement.executeQuery(query);
+			while (resultSet.next()) {
+				if (resultSet.getInt(1) == 0) {
+					System.out.println("No song present");
+				}
+			}
+			query = "select * from song";
+			statement = connection.createStatement();
+			resultSet = statement.executeQuery(query);
+			while (resultSet.next()) {
+				System.out.println(resultSet.getString(1) + " | " + resultSet.getString(2) + " | "
+						+ resultSet.getString(3) + " | " + resultSet.getString(4) + " | " + resultSet.getString(5)
+						+ " | " + resultSet.getString(6) + " | " + resultSet.getString(7));
+			}
+			System.out.println(
+					"what changes you want to make\n1.song id\n2.song name\n3. singar name\n.4 movie name \n.5 composer \n.6 lyricist \n.7 length");
+			int a = scanner.nextInt();
+			switch (a) {
+			case 1:
+				query = "update song set `id`= ? where `id` = ?";
+				preparedStatement = connection.prepareStatement(query);
+				System.out.println("enter the value to be set for song id");
+				preparedStatement.setInt(1, scanner.nextInt());
+				System.out.println("enter the current song id");
+				preparedStatement.setInt(2, scanner.nextInt());
+				resultInt = preparedStatement.executeUpdate();
+				System.out.println(" " + resultInt + " song updated successfully");
+				break;
+
+			case 2:
+				query = "update song set `songName`= ? where `songName`= ?";
+				preparedStatement = connection.prepareStatement(query);
+				System.out.println("enter the value to be set for song name");
+				preparedStatement.setString(1, scanner.next());
+				System.out.println("enter the current value of the song name");
+				preparedStatement.setString(2, scanner.next());
+				resultInt = preparedStatement.executeUpdate();
+				System.out.println(" " + resultInt + " song updated successfully");
+				break;
+
+			case 3:
+				query = "update song set `singerName`= ? where `singerName` = ?";
+				preparedStatement = connection.prepareStatement(query);
+				System.out.println("enter the value to be set for singer name");
+				preparedStatement.setString(1, scanner.next());
+				System.out.println("enter the current value of the singer name");
+				preparedStatement.setString(2, scanner.next());
+				resultInt = preparedStatement.executeUpdate();
+				System.out.println(" " + resultInt + " song updated successfully");
+				break;
+
+			case 4:
+				query = "update song set `movieName`= ? where `movieName` = ?";
+				preparedStatement = connection.prepareStatement(query);
+				System.out.println("enter the value to be set for movie name");
+				preparedStatement.setString(1, scanner.next());
+				System.out.println("enter the current value of the movie name");
+				preparedStatement.setString(2, scanner.next());
+				resultInt = preparedStatement.executeUpdate();
+				System.out.println(" " + resultInt + " song updated successfully");
+				break;
+
+			case 5:
+				query = "update song set `composer`= ? where `composer` = ?";
+				preparedStatement = connection.prepareStatement(query);
+				System.out.println("enter the value to be set for composer");
+				preparedStatement.setString(1, scanner.next());
+				System.out.println("enter the current value of the composer");
+				preparedStatement.setString(2, scanner.next());
+				resultInt = preparedStatement.executeUpdate();
+				System.out.println(" " + resultInt + " song updated successfully");
+				break;
+
+			case 6:
+				query = "update song set `lyricist`= ? where `lyricist` = ?";
+				preparedStatement = connection.prepareStatement(query);
+				System.out.println("enter the value to be set for lyricist");
+				preparedStatement.setString(1, scanner.next());
+				System.out.println("enter the current value of the lyricist");
+				preparedStatement.setString(2, scanner.next());
+				resultInt = preparedStatement.executeUpdate();
+				System.out.println(" " + resultInt + " song updated successfully");
+				break;
+
+			case 7:
+				query = "update song set `length`= ? where `length` = ?";
+				preparedStatement = connection.prepareStatement(query);
+				System.out.println("enter the value to be set for length");
+				preparedStatement.setString(1, scanner.next());
+				System.out.println("enter the current value of the length");
+				preparedStatement.setString(2, scanner.next());
+				resultInt = preparedStatement.executeUpdate();
+				System.out.println(" " + resultInt + " song updated successfully");
+				break;
+			default:
+				System.out.println("wrong input");
+				return;
+
+			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			if (connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+
+	public static void displayAllSong() {
+		try {
+			fileReader = new FileReader(filePath);
+			properties.load(fileReader);
+			Class.forName(properties.getProperty("driverPath"));
+			connection = DriverManager.getConnection(properties.getProperty("dbPath"), properties);
+			query = "select count(*) from song";
+			statement = connection.createStatement();
+			resultSet = statement.executeQuery(query);
+			while (resultSet.next()) {
+				if (resultSet.getInt(1) == 0) {
+					System.out.println("No song present");
+				}
+			}
+			query = "select * from song";
+			statement = connection.createStatement();
+			resultSet = statement.executeQuery(query);
+			while (resultSet.next()) {
+				System.out.println(resultSet.getString(1) + " | " + resultSet.getString(2) + " | "
+						+ resultSet.getString(3) + " | " + resultSet.getString(4) + " | " + resultSet.getString(5)
+						+ " | " + resultSet.getString(6) + " | " + resultSet.getString(7));
+			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			if (connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+}
